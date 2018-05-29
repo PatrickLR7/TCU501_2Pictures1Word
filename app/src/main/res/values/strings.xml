@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">2 Pictures 1 Word</string>
+
+    <string-array name="themes">
+        <item>Indoor and Outdoor Activities</item>
+        <item>Wildlife at the Park</item>
+        <item>Emergencies and Natural Disasters</item>
+        <item>Oh, the Places You Will Go</item>
+    </string-array>
+</resources>
