@@ -19,7 +19,7 @@
             tools:layout_editor_absoluteY="27dp">
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinnerTheme"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_alignEnd="@+id/txtTCU"
@@ -45,13 +45,13 @@
 
             <Button
                 android:id="@+id/btnPlay"
-                style="@android:style/Widget.Material.Light.Button.Borderless"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="52dp"
                 android:background="@drawable/rounded_button"
+                android:onClick="btnPlay"
                 android:padding="20dip"
                 android:text="Play!"
                 android:textColor="@color/colorOrangeDark"

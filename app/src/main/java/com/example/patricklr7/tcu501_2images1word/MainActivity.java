@@ -1,13 +1,68 @@
 package com.example.patricklr7.tcu501_2images1word;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    private int idTheme;
+    private Spinner sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        idTheme = 1;
+        sp = (Spinner) findViewById(R.id.spinnerTheme);
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                if(selectedItem.equals("Indoor and Outdoor Activities"))
+                {
+                    idTheme = 1;
+                } else if (selectedItem.equals("Wildlife at the Park")){
+                    idTheme = 2;
+                } else if (selectedItem.equals("Emergencies and Natural Disasters")){
+                    idTheme = 3;
+                } else if (selectedItem.equals("Oh, the Places You Will Go")){
+                    idTheme = 4;
+                }
+            } // to close the onItemSelected
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
+
     }
+
+
+    public void btnPlay(View v){
+        Intent intent;
+        switch (idTheme) {
+            case 1:
+                intent = new Intent(this, InOutDoorActivity.class);
+                startActivity(intent);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+                break;
+        }
+
+    }
+
 }
