@@ -70,6 +70,7 @@ public class InOutDoorActivity extends AppCompatActivity {
             "reading",
             "running",
             "skateboarding",
+            "soccer",
             "videogames"
     };
 
@@ -102,7 +103,7 @@ public class InOutDoorActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String result = "";
                 for(int i = 0; i < Common.userSubmitAnswer.length; i++) {
-                    result += String.valueOf(Common.userSubmitAnswer);
+                    result = String.valueOf(Common.userSubmitAnswer);
                 }
                 if(result.equals(correct_answer)){
                     Toast.makeText(getApplicationContext(), "Nice, you guessed the word " + result + " correctly!", Toast.LENGTH_LONG).show();
@@ -122,7 +123,7 @@ public class InOutDoorActivity extends AppCompatActivity {
                     setupList();
 
                 } else {
-                    Toast.makeText(InOutDoorActivity.this, "Inténtalo de nuevo!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InOutDoorActivity.this, "Try again!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
