@@ -8,11 +8,14 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Spinner;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class MainActivity extends AppCompatActivity {
 
 
     private int idTheme;
     private Spinner sp;
+    private GifImageView gifImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         idTheme = 1;
+        gifImageView = (GifImageView) findViewById(R.id.imgViewGif);
         sp = (Spinner) findViewById(R.id.spinnerTheme);
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
@@ -29,12 +33,16 @@ public class MainActivity extends AppCompatActivity {
                 if(selectedItem.equals("Indoor and Outdoor Activities"))
                 {
                     idTheme = 1;
+                    gifImageView.setImageResource(R.drawable.animatedsoccer);
                 } else if (selectedItem.equals("Wildlife at the Park")){
                     idTheme = 2;
+                    gifImageView.setImageResource(R.drawable.animatedmonkey);
                 } else if (selectedItem.equals("Emergencies and Natural Disasters")){
                     idTheme = 3;
+                    gifImageView.setImageResource(R.drawable.animatedvolcano);
                 } else if (selectedItem.equals("Oh, the Places You Will Go")){
                     idTheme = 4;
+                    gifImageView.setImageResource(R.drawable.animatedbeach);
                 }
             } // to close the onItemSelected
             public void onNothingSelected(AdapterView<?> parent)

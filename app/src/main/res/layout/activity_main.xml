@@ -35,21 +35,30 @@
                 android:id="@+id/txtViewTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtTCU"
+                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="36dp"
                 android:text="SELECT A THEME:"
                 android:textAppearance="@android:style/TextAppearance.Material.Headline"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold" />
 
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/imgViewGif"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignEnd="@+id/btnPlay"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="178dp"
+                android:src="@drawable/animatedsoccer" />
+
             <Button
                 android:id="@+id/btnPlay"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="52dp"
+                android:layout_marginBottom="46dp"
                 android:background="@drawable/rounded_button"
                 android:onClick="btnPlay"
                 android:padding="20dip"
