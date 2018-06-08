@@ -5,7 +5,7 @@ package com.example.patricklr7.tcu501_2images1word.Common;
  */
 
 public class Common {
-    public static char userSubmitAnswer;
+    public static char[] userSubmitAnswer;
     public static int count = 1;
     public static String[] alphabetChars = {
         "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
