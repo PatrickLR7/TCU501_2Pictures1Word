@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-public class EmergenciesDisastersActivity extends AppCompatActivity {
+public class PlacesActivity extends AppCompatActivity {
 
     public List<String> lettersSource = new ArrayList<>();
     public GridViewAnswerAdapter answerAdapter;
@@ -35,48 +35,48 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
     int wordsCount;
 
     public int[] image_list1 = {
-            R.drawable.avalanche1,
-            R.drawable.caraccident1,
-            R.drawable.drought1,
-            R.drawable.earthquake1,
-            R.drawable.eruption1,
-            R.drawable.flood1,
-            R.drawable.forestfire1,
-            R.drawable.hurricane1,
-            R.drawable.landslide1,
-            R.drawable.thunderstorm1,
-            R.drawable.tornado1,
-            R.drawable.tsunami1
+            R.drawable.amusementpark1,
+            R.drawable.aquarium1,
+            R.drawable.beach1,
+            R.drawable.cinema1,
+            R.drawable.island1,
+            R.drawable.mountain1,
+            R.drawable.museum1,
+            R.drawable.pool1,
+            R.drawable.rainforest1,
+            R.drawable.volcano1,
+            R.drawable.waterfall1,
+            R.drawable.zoo1
     };
 
     public int[] image_list2 = {
-            R.drawable.avalanche2,
-            R.drawable.caraccident2,
-            R.drawable.drought2,
-            R.drawable.earthquake2,
-            R.drawable.eruption2,
-            R.drawable.flood2,
-            R.drawable.forestfire2,
-            R.drawable.hurricane2,
-            R.drawable.landslide2,
-            R.drawable.thunderstorm2,
-            R.drawable.tornado2,
-            R.drawable.tsunami2
+            R.drawable.amusementpark2,
+            R.drawable.aquarium2,
+            R.drawable.beach2,
+            R.drawable.cinema2,
+            R.drawable.island2,
+            R.drawable.mountain2,
+            R.drawable.museum2,
+            R.drawable.pool2,
+            R.drawable.rainforest2,
+            R.drawable.volcano2,
+            R.drawable.waterfall2,
+            R.drawable.zoo2
     };
 
     public String[] answerList = {
-            "avalanche",
-            "caraccident",
-            "drought",
-            "earthquake",
-            "eruption",
-            "flood",
-            "forestfire",
-            "hurricane",
-            "landslide",
-            "thunderstorm",
-            "tornado",
-            "tsunami"
+            "amusementpark",
+            "aquarium",
+            "beach",
+            "cinema",
+            "island",
+            "mountain",
+            "museum",
+            "pool",
+            "rainforest",
+            "volcano",
+            "waterfall",
+            "zoo"
     };
 
     public char[] answer;
@@ -86,7 +86,7 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_emergencies_disasters);
+        setContentView(R.layout.activity_places);
 
         randUsed = new HashSet<Integer>();
         wordsCount = 0;
@@ -122,14 +122,14 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
                     GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(setupEmptyList(), getApplicationContext());
                     gridViewAnswer.setAdapter(answerAdapter);
 
-                    GridViewLettersAdapter lettersAdapter = new GridViewLettersAdapter(lettersSource, getApplicationContext(), EmergenciesDisastersActivity.this);
+                    GridViewLettersAdapter lettersAdapter = new GridViewLettersAdapter(lettersSource, getApplicationContext(), PlacesActivity.this);
                     gridViewLetters.setAdapter(lettersAdapter);
                     lettersAdapter.notifyDataSetChanged();
 
                     setupList();
 
                 } else {
-                    Toast.makeText(EmergenciesDisastersActivity.this, "Try again!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PlacesActivity.this, "Try again!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -182,7 +182,7 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
 
 
         } else{
-            AlertDialog.Builder builder = new AlertDialog.Builder(EmergenciesDisastersActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(PlacesActivity.this);
             builder.setCancelable(false);
             builder.setTitle("Congratulations!!");
             builder.setMessage("You guessed all the words correctly, good job!" + "\n" +
@@ -216,4 +216,5 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
         }
         return result;
     }
+
 }

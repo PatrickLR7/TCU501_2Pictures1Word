@@ -22,7 +22,8 @@
             android:name=".InOutDoorActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".WildlifeActivity" />
-        <activity android:name=".EmergenciesDisastersActivity"></activity>
+        <activity android:name=".EmergenciesDisastersActivity" />
+        <activity android:name=".PlacesActivity"></activity>
     </application>
 
 </manifest>

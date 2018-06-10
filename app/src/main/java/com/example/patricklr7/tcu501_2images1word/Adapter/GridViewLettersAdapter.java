@@ -13,6 +13,7 @@ import com.example.patricklr7.tcu501_2images1word.Common.Common;
 import com.example.patricklr7.tcu501_2images1word.EmergenciesDisastersActivity;
 import com.example.patricklr7.tcu501_2images1word.InOutDoorActivity;
 import com.example.patricklr7.tcu501_2images1word.MainActivity;
+import com.example.patricklr7.tcu501_2images1word.PlacesActivity;
 import com.example.patricklr7.tcu501_2images1word.R;
 import com.example.patricklr7.tcu501_2images1word.WildlifeActivity;
 
@@ -29,6 +30,7 @@ public class GridViewLettersAdapter extends BaseAdapter {
     private InOutDoorActivity inOutDoorActivity;
     private WildlifeActivity wildlifeActivity;
     private EmergenciesDisastersActivity emergenciesDisastersActivity;
+    private PlacesActivity placesActivity;
 
     public GridViewLettersAdapter(List<String> lSuggestSource, Context context, InOutDoorActivity inOutDoorActivity) {
         this.lSuggestSource = lSuggestSource;
@@ -46,6 +48,12 @@ public class GridViewLettersAdapter extends BaseAdapter {
         this.lSuggestSource = lSuggestSource;
         this.context = context;
         this.emergenciesDisastersActivity = emergenciesDisastersActivity;
+    }
+
+    public GridViewLettersAdapter(List<String> lSuggestSource, Context context, PlacesActivity placesActivity) {
+        this.lSuggestSource = lSuggestSource;
+        this.context = context;
+        this.placesActivity = placesActivity;
     }
 
     @Override
@@ -182,6 +190,41 @@ public class GridViewLettersAdapter extends BaseAdapter {
                                 emergenciesDisastersActivity.lettersAdapter = new GridViewLettersAdapter(emergenciesDisastersActivity.lettersSource, context, emergenciesDisastersActivity);
                                 emergenciesDisastersActivity.gridViewLetters.setAdapter(emergenciesDisastersActivity.lettersAdapter);
                                 emergenciesDisastersActivity.lettersAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+                } else if (Common.themeID == 4){
+                    button1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //If correct answer contains character user just clicked,
+                            //add it into answer list.
+                            if (String.valueOf(placesActivity.answer).contains(lSuggestSource.get(i))) {
+                                char compare = lSuggestSource.get(i).charAt(0);
+
+                                for (int i = 0; i < placesActivity.answer.length; i++) {
+                                    if (compare == placesActivity.answer[i]) {
+                                        Common.userSubmitAnswer[i] = compare;
+                                    }
+                                }
+
+                                //Update Interface
+                                GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(Common.userSubmitAnswer, context);
+                                placesActivity.gridViewAnswer.setAdapter(answerAdapter);
+                                answerAdapter.notifyDataSetChanged();
+
+                                //Remove letter that was already used.
+                                placesActivity.lettersSource.set(i, "null");
+                                placesActivity.lettersAdapter = new GridViewLettersAdapter(placesActivity.lettersSource, context, placesActivity);
+                                placesActivity.gridViewLetters.setAdapter(placesActivity.lettersAdapter);
+                                placesActivity.lettersAdapter.notifyDataSetChanged();
+
+                            } else {
+                                //Remove letter that was already used.
+                                placesActivity.lettersSource.set(i, "null");
+                                placesActivity.lettersAdapter = new GridViewLettersAdapter(placesActivity.lettersSource, context, placesActivity);
+                                placesActivity.gridViewLetters.setAdapter(placesActivity.lettersAdapter);
+                                placesActivity.lettersAdapter.notifyDataSetChanged();
                             }
                         }
                     });

@@ -190,7 +190,7 @@ public class InOutDoorActivity extends AppCompatActivity {
 
         } else{
             AlertDialog.Builder builder = new AlertDialog.Builder(InOutDoorActivity.this);
-            builder.setCancelable(true);
+            builder.setCancelable(false);
             builder.setTitle("Congratulations!!");
             builder.setMessage("You guessed all the words correctly, good job!" + "\n" +
                                "Do you want to try again? ");
