@@ -20,8 +20,9 @@
         </activity>
         <activity
             android:name=".InOutDoorActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".WildlifeActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".WildlifeActivity" />
+        <activity android:name=".EmergenciesDisastersActivity"></activity>
     </application>
 
 </manifest>
