@@ -62,7 +62,7 @@ public class GridViewLettersAdapter extends BaseAdapter {
                 button1.setLayoutParams(new GridView.LayoutParams(85, 85));
                 button1.setPadding(8, 8, 8,  8);
                 button1.setBackgroundColor(Color.DKGRAY);
-                button1.setTextColor(ContextCompat.getColor(context, R.color.colorOrangeDark));
+                button1.setTextColor(ContextCompat.getColor(context, R.color.colorOrangeLight));
                 button1.setText(lSuggestSource.get(i));
                 button1.setOnClickListener(new View.OnClickListener() {
                     @Override

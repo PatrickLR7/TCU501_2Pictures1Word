@@ -44,6 +44,7 @@ public class InOutDoorActivity extends AppCompatActivity {
             R.drawable.skateboarding1,
             R.drawable.soccer1,
             R.drawable.videogames1,
+            R.drawable.painting1
     };
 
     public int[] image_list2 = {
@@ -57,7 +58,8 @@ public class InOutDoorActivity extends AppCompatActivity {
             R.drawable.running2,
             R.drawable.skateboarding2,
             R.drawable.soccer2,
-            R.drawable.videogames2
+            R.drawable.videogames2,
+            R.drawable.painting2
     };
 
     public String[] answerList = {
@@ -71,7 +73,8 @@ public class InOutDoorActivity extends AppCompatActivity {
             "running",
             "skateboarding",
             "soccer",
-            "videogames"
+            "videogames",
+            "painting"
     };
 
     public char[] answer;
@@ -88,7 +91,7 @@ public class InOutDoorActivity extends AppCompatActivity {
 
     }
 
-    private void initView() {
+    public void initView() {
         gridViewAnswer = (GridView)findViewById(R.id.gridViewAnswer);
         gridViewLetters = (GridView)findViewById(R.id.gridViewLetters);
 
@@ -129,7 +132,7 @@ public class InOutDoorActivity extends AppCompatActivity {
         });
     }
 
-    private void setupList() {
+    public void setupList() {
         //Random images
         Random random = new Random();
         int aux = random.nextInt(image_list1.length);
@@ -171,7 +174,7 @@ public class InOutDoorActivity extends AppCompatActivity {
 
     }
 
-    private char[] setupEmptyList() {
+    public char[] setupEmptyList() {
         char result[] = new char[answer.length];
         for(int i = 0; i < answer.length; i++){
             result[i] = ' ';
