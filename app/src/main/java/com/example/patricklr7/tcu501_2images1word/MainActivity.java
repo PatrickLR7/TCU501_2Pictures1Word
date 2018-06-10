@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case 2:
+                intent = new Intent(this, WildlifeActivity.class);
+                startActivity(intent);
                 break;
             case 3:
                 break;

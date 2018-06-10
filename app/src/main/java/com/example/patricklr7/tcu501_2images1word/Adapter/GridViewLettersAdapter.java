@@ -13,6 +13,7 @@ import com.example.patricklr7.tcu501_2images1word.Common.Common;
 import com.example.patricklr7.tcu501_2images1word.InOutDoorActivity;
 import com.example.patricklr7.tcu501_2images1word.MainActivity;
 import com.example.patricklr7.tcu501_2images1word.R;
+import com.example.patricklr7.tcu501_2images1word.WildlifeActivity;
 
 import java.util.List;
 
@@ -25,11 +26,18 @@ public class GridViewLettersAdapter extends BaseAdapter {
     private List<String> lSuggestSource;
     private Context context;
     private InOutDoorActivity inOutDoorActivity;
+    private WildlifeActivity wildlifeActivity;
 
     public GridViewLettersAdapter(List<String> lSuggestSource, Context context, InOutDoorActivity inOutDoorActivity) {
         this.lSuggestSource = lSuggestSource;
         this.context = context;
         this.inOutDoorActivity = inOutDoorActivity;
+    }
+
+    public GridViewLettersAdapter(List<String> lSuggestSource, Context context, WildlifeActivity wildlifeActivity) {
+        this.lSuggestSource = lSuggestSource;
+        this.context = context;
+        this.wildlifeActivity = wildlifeActivity;
     }
 
     @Override
@@ -64,40 +72,77 @@ public class GridViewLettersAdapter extends BaseAdapter {
                 button1.setBackgroundColor(Color.DKGRAY);
                 button1.setTextColor(ContextCompat.getColor(context, R.color.colorOrangeLight));
                 button1.setText(lSuggestSource.get(i));
-                button1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //If correct answer contains character user just clicked,
-                        //add it into answer list.
-                        if(String.valueOf(inOutDoorActivity.answer).contains(lSuggestSource.get(i))){
-                            char compare = lSuggestSource.get(i).charAt(0);
+                if(Common.themeID == 1) {
+                    button1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //If correct answer contains character user just clicked,
+                            //add it into answer list.
+                            if (String.valueOf(inOutDoorActivity.answer).contains(lSuggestSource.get(i))) {
+                                char compare = lSuggestSource.get(i).charAt(0);
 
-                            for(int i = 0; i < inOutDoorActivity.answer.length; i++) {
-                                if(compare == inOutDoorActivity.answer[i]){
-                                    Common.userSubmitAnswer[i] = compare;
+                                for (int i = 0; i < inOutDoorActivity.answer.length; i++) {
+                                    if (compare == inOutDoorActivity.answer[i]) {
+                                        Common.userSubmitAnswer[i] = compare;
+                                    }
                                 }
+
+                                //Update Interface
+                                GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(Common.userSubmitAnswer, context);
+                                inOutDoorActivity.gridViewAnswer.setAdapter(answerAdapter);
+                                answerAdapter.notifyDataSetChanged();
+
+                                //Remove letter that was already used.
+                                inOutDoorActivity.lettersSource.set(i, "null");
+                                inOutDoorActivity.lettersAdapter = new GridViewLettersAdapter(inOutDoorActivity.lettersSource, context, inOutDoorActivity);
+                                inOutDoorActivity.gridViewLetters.setAdapter(inOutDoorActivity.lettersAdapter);
+                                inOutDoorActivity.lettersAdapter.notifyDataSetChanged();
+
+                            } else {
+                                //Remove letter that was already used.
+                                inOutDoorActivity.lettersSource.set(i, "null");
+                                inOutDoorActivity.lettersAdapter = new GridViewLettersAdapter(inOutDoorActivity.lettersSource, context, inOutDoorActivity);
+                                inOutDoorActivity.gridViewLetters.setAdapter(inOutDoorActivity.lettersAdapter);
+                                inOutDoorActivity.lettersAdapter.notifyDataSetChanged();
                             }
-
-                            //Update Interface
-                            GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(Common.userSubmitAnswer, context);
-                            inOutDoorActivity.gridViewAnswer.setAdapter(answerAdapter);
-                            answerAdapter.notifyDataSetChanged();
-
-                            //Remove letter that was already used.
-                            inOutDoorActivity.lettersSource.set(i, "null");
-                            inOutDoorActivity.lettersAdapter = new GridViewLettersAdapter(inOutDoorActivity.lettersSource, context, inOutDoorActivity);
-                            inOutDoorActivity.gridViewLetters.setAdapter(inOutDoorActivity.lettersAdapter);
-                            inOutDoorActivity.lettersAdapter.notifyDataSetChanged();
-
-                        } else{
-                            //Remove letter that was already used.
-                            inOutDoorActivity.lettersSource.set(i, "null");
-                            inOutDoorActivity.lettersAdapter = new GridViewLettersAdapter(inOutDoorActivity.lettersSource, context, inOutDoorActivity);
-                            inOutDoorActivity.gridViewLetters.setAdapter(inOutDoorActivity.lettersAdapter);
-                            inOutDoorActivity.lettersAdapter.notifyDataSetChanged();
                         }
-                    }
-                });
+                    });
+                } else if (Common.themeID == 2){
+                    button1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //If correct answer contains character user just clicked,
+                            //add it into answer list.
+                            if (String.valueOf(wildlifeActivity.answer).contains(lSuggestSource.get(i))) {
+                                char compare = lSuggestSource.get(i).charAt(0);
+
+                                for (int i = 0; i < wildlifeActivity.answer.length; i++) {
+                                    if (compare == wildlifeActivity.answer[i]) {
+                                        Common.userSubmitAnswer[i] = compare;
+                                    }
+                                }
+
+                                //Update Interface
+                                GridViewAnswerAdapter answerAdapter = new GridViewAnswerAdapter(Common.userSubmitAnswer, context);
+                                wildlifeActivity.gridViewAnswer.setAdapter(answerAdapter);
+                                answerAdapter.notifyDataSetChanged();
+
+                                //Remove letter that was already used.
+                                wildlifeActivity.lettersSource.set(i, "null");
+                                wildlifeActivity.lettersAdapter = new GridViewLettersAdapter(wildlifeActivity.lettersSource, context, wildlifeActivity);
+                                wildlifeActivity.gridViewLetters.setAdapter(wildlifeActivity.lettersAdapter);
+                                wildlifeActivity.lettersAdapter.notifyDataSetChanged();
+
+                            } else {
+                                //Remove letter that was already used.
+                                wildlifeActivity.lettersSource.set(i, "null");
+                                wildlifeActivity.lettersAdapter = new GridViewLettersAdapter(wildlifeActivity.lettersSource, context, wildlifeActivity);
+                                wildlifeActivity.gridViewLetters.setAdapter(wildlifeActivity.lettersAdapter);
+                                wildlifeActivity.lettersAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    });
+                }
             }
         } else{
             button1 = (Button)view;
