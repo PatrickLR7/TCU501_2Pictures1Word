@@ -1,6 +1,9 @@
 package com.example.patricklr7.tcu501_2images1word;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +19,7 @@ import com.example.patricklr7.tcu501_2images1word.R;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -32,6 +36,10 @@ public class InOutDoorActivity extends AppCompatActivity {
     public GridView gridViewAnswer, gridViewLetters;
     public ImageView imgViewQuestion;
     public ImageView imgViewQuestion2;
+    //public ArrayList<Integer> listRand;
+    public HashSet<Integer> randUsed;
+    int wordsCount;
+
     public int[] image_list1 = {
             R.drawable.basket1,
             R.drawable.boardgame1,
@@ -86,6 +94,8 @@ public class InOutDoorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inoutdoor);
 
+        randUsed = new HashSet<Integer>();
+        wordsCount = 0;
 
         initView();
 
@@ -135,43 +145,75 @@ public class InOutDoorActivity extends AppCompatActivity {
     public void setupList() {
         //Random images
         Random random = new Random();
-        int aux = random.nextInt(image_list1.length);
-        int imageSelected = image_list1[aux];
-        imgViewQuestion.setImageResource(imageSelected);
-        imageSelected = image_list2[aux];
-        imgViewQuestion2.setImageResource(imageSelected);
+        if(wordsCount < image_list1.length-1) {
+            int aux = random.nextInt(image_list1.length);
+            while(randUsed.contains(aux)){
+                aux = random.nextInt(image_list1.length);
+            }
+            randUsed.add(aux);
+            wordsCount++;
+            int imageSelected = image_list1[aux];
+            imgViewQuestion.setImageResource(imageSelected);
+            imageSelected = image_list2[aux];
+            imgViewQuestion2.setImageResource(imageSelected);
 
-        correct_answer = answerList[aux];
-        answer = correct_answer.toCharArray();
+            correct_answer = answerList[aux];
+            answer = correct_answer.toCharArray();
 
-        Common.userSubmitAnswer = new char[answer.length];
+            Common.userSubmitAnswer = new char[answer.length];
 
-        //Add answer character to list
-        lettersSource.clear();
-        for(char item:answer){
-            //Agrega la palabra a la lista.
-            lettersSource.add(String.valueOf(item));
+            //Add answer character to list
+            lettersSource.clear();
+            for (char item : answer) {
+                //Agrega la palabra a la lista.
+                lettersSource.add(String.valueOf(item));
+            }
+
+            //Add random characters to letters suggestion list.
+            for (int i = answer.length; i < answer.length * 2; i++) {
+                lettersSource.add(Common.alphabetChars[random.nextInt(Common.alphabetChars.length)]);
+            }
+
+            //Sort random
+            Collections.shuffle(lettersSource);
+
+            //Set GridViews
+            answerAdapter = new GridViewAnswerAdapter(setupEmptyList(), this);
+            lettersAdapter = new GridViewLettersAdapter(lettersSource, this, this);
+
+            answerAdapter.notifyDataSetChanged();
+            lettersAdapter.notifyDataSetChanged();
+
+            gridViewLetters.setAdapter(lettersAdapter);
+            gridViewAnswer.setAdapter(answerAdapter);
+
+
+        } else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(InOutDoorActivity.this);
+            builder.setCancelable(true);
+            builder.setTitle("Congratulations!!");
+            builder.setMessage("You guessed all the words correctly, good job!" + "\n" +
+                               "Do you want to try again? ");
+
+            builder.setNegativeButton("Return to Main Menu", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            builder.setPositiveButton("Try Again", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    wordsCount = 0;
+                    randUsed.clear();
+                    initView();
+                }
+            });
+            builder.show();
         }
-
-        //Add random characters to letters suggestion list.
-        for (int i = answer.length; i<answer.length*2; i++){
-            lettersSource.add(Common.alphabetChars[random.nextInt(Common.alphabetChars.length)]);
-        }
-
-        //Sort random
-        Collections.shuffle(lettersSource);
-
-        //Set GridViews
-        answerAdapter = new GridViewAnswerAdapter(setupEmptyList(), this);
-        lettersAdapter = new GridViewLettersAdapter(lettersSource, this, this);
-
-        answerAdapter.notifyDataSetChanged();
-        lettersAdapter.notifyDataSetChanged();
-
-        gridViewLetters.setAdapter(lettersAdapter);
-        gridViewAnswer.setAdapter(answerAdapter);
-
-
     }
 
     public char[] setupEmptyList() {
