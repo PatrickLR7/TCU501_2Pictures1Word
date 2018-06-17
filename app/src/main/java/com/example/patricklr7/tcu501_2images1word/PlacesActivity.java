@@ -2,6 +2,7 @@ package com.example.patricklr7.tcu501_2images1word;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.patricklr7.tcu501_2images1word.Adapter.GridViewAnswerAdapter;
@@ -112,7 +114,13 @@ public class PlacesActivity extends AppCompatActivity {
                     result = String.valueOf(Common.userSubmitAnswer);
                 }
                 if(result.equals(correct_answer)){
-                    Toast.makeText(getApplicationContext(), "Nice, you guessed the word " + result + " correctly!", Toast.LENGTH_LONG).show();
+                    String texto = "Nice, you guessed the word \"" + result + "\" correctly!";
+                    Toast toast1 = Toast.makeText(getApplicationContext(), texto, Toast.LENGTH_SHORT);
+                    View customT = toast1.getView();
+                    customT.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOceanBlue));
+                    TextView t = customT.findViewById(android.R.id.message);
+                    t.setTextColor(ContextCompat.getColor(getApplicationContext(), android.R.color.white));
+                    toast1.show();
 
                     //Reset
                     Common.count = 0;
@@ -129,7 +137,13 @@ public class PlacesActivity extends AppCompatActivity {
                     setupList();
 
                 } else {
-                    Toast.makeText(PlacesActivity.this, "Try again!", Toast.LENGTH_SHORT).show();
+                    String texto = "Try again!";
+                    Toast toast1 = Toast.makeText(getApplicationContext(), texto, Toast.LENGTH_SHORT);
+                    View customT = toast1.getView();
+                    customT.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOceanBlue));
+                    TextView t = customT.findViewById(android.R.id.message);
+                    t.setTextColor(ContextCompat.getColor(getApplicationContext(), android.R.color.white));
+                    toast1.show();
                 }
             }
         });

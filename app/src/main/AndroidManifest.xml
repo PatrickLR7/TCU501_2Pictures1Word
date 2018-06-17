@@ -21,9 +21,13 @@
         <activity
             android:name=".InOutDoorActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".WildlifeActivity" />
-        <activity android:name=".EmergenciesDisastersActivity" />
-        <activity android:name=".PlacesActivity"></activity>
+        <activity android:name=".WildlifeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EmergenciesDisastersActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PlacesActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

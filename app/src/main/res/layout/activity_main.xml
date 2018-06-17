@@ -22,9 +22,9 @@
                 android:id="@+id/spinnerTheme"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_alignEnd="@+id/txtTCU"
-                android:layout_below="@+id/txtViewTheme"
-                android:layout_marginTop="26dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/imageView"
+                android:layout_marginTop="36dp"
                 android:background="@color/colorWhite"
                 android:entries="@array/themes"
                 android:popupBackground="@color/colorWhite"
@@ -35,9 +35,9 @@
                 android:id="@+id/txtViewTheme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_alignTop="@+id/imageView"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="34dp"
                 android:text="SELECT A THEME:"
                 android:textAppearance="@android:style/TextAppearance.Material.Headline"
                 android:textColor="@color/colorWhite"
@@ -48,8 +48,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_alignEnd="@+id/btnPlay"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="178dp"
+                android:layout_centerVertical="true"
                 android:src="@drawable/animatedsoccer" />
 
             <Button
@@ -58,7 +57,7 @@
                 android:layout_height="170dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="46dp"
+                android:layout_marginBottom="18dp"
                 android:background="@drawable/rounded_button"
                 android:onClick="btnPlay"
                 android:padding="20dip"
@@ -73,6 +72,27 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:text="TCU501"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/txtTCU"
+                android:layout_below="@+id/txtTCU"
+                android:layout_marginTop="7dp"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/tcu501logo" />
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Prepared by: Patrick Loney Rojas"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold" />
 
