@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">2 Pictures 1 Word</string>
 
+    <string name="tIns"><font fgcolor='#FFEF5320'>Instructions </font></string>
+    <string name="instrucciones">
+
+        <b>Español</b>
+        \n
+        \n
+        2 Pictures 1 Word es una aplicación desarrollada para Android, con el objetivo de repasar vocabulario de varios temas de cuarto grado. En la pantalla principal, los usuarios deben seleccionar un tema entre 4 diferentes: actividades de interiores y al aire libre, vida salvaje en el parque, emergencias y desastres naturales y/o los lugares a los que irás.
+        Una vez que se selecciona un tema, se debe tocar el botón \“Play!\” para iniciar el juego. Para jugar, el programa creará una lista de palabras relacionadas con el tema. En la siguiente pantalla, en la parte superior aparecerán dos imágenes que están relacionadas con una de las palabras que se debe adivinar, debajo de estas imágenes van a haber espacios en blanco que corresponden a las letras de dicha palabra. Más abajo, encontraremos botones con distintas letras ordenadas al azar. Los estudiantes deben elegir las letras correctas para formar la palabra y tocar los botones correspondientes.
+        Finalmente, en la parte inferior de la pantalla, se mostrará un botón que se debe tocar para verificar que la palabra se haya adivinado correctamente. Si se adivina correctamente la palabra, se mostrará un mensaje que lo indica y se pasará siguiente palabra. El objetivo es adivinar todas las palabras de los temas correctamente y cuando se adivinen todas se muestra una ventana para volver al menú principal para elegir otro tema o para intentar de nuevo.
+
+        \n
+        \n
+        <b>Inglés</b>
+
+        \n
+        \n
+        2 Pictures 1 Word is an app developed for Android. It is aimed at reviewing vocabulary of 4th grade topics. On the main screen, users have to select a topic out of 4 different options to choose: indoor and outdoor activities, wildlife at the park, emergencies and natural disasters, and/or the places you will go to.
+        Once a topic is selected, the button \“Play!\” must be pressed to start the game. The program will create a list of words related to the selected topic. The next screen will show two images in its upper part; these images are related to one of the words that must be guessed. Under these images, there will be blank spaces that match with the word. Below these spaces, there will be buttons with scrambled letters. Students must choose the correct letters to form the word and click their corresponding buttons. Finally, in the lower part of the screen, there will be a button to check if the word was guessed correctly. In that case, a message will be shown to indicate the word was guessed right and another button will appear to continue with the next word.  The objective is to guess all the words from all the themes correctly, when all the words are guessed, a window will be shown to return to the main menu so a new topic can be selected, or to try again.
+</string>
+
     <string-array name="themes">
         <item>Indoor and Outdoor Activities</item>
         <item>Wildlife at the Park</item>
