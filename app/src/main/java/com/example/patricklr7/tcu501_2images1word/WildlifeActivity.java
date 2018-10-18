@@ -2,6 +2,7 @@ package com.example.patricklr7.tcu501_2images1word;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.speech.tts.TextToSpeech;
+
 
 import com.example.patricklr7.tcu501_2images1word.Adapter.GridViewAnswerAdapter;
 import com.example.patricklr7.tcu501_2images1word.Adapter.GridViewLettersAdapter;
@@ -21,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class WildlifeActivity extends AppCompatActivity {
@@ -35,6 +39,8 @@ public class WildlifeActivity extends AppCompatActivity {
     //public ArrayList<Integer> listRand;
     public HashSet<Integer> randUsed;
     int wordsCount;
+    TextToSpeech audio1;
+    Button btnHint;
 
     public int[] image_list1 = {
             R.drawable.crab1,
@@ -94,6 +100,17 @@ public class WildlifeActivity extends AppCompatActivity {
         wordsCount = 0;
 
         initView();
+
+        audio1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    audio1.setLanguage(Locale.US);
+                }
+            }
+        });
+
+        btnHint = (Button) findViewById(R.id.btnAudioW);
     }
 
     public void initView() {
@@ -229,5 +246,17 @@ public class WildlifeActivity extends AppCompatActivity {
             result[i] = ' ';
         }
         return result;
+    }
+
+    public void audios(View v){
+        String toSpeak = correct_answer;
+        //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
+        if(!audio1.isSpeaking()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null, null);
+            } else {
+                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        }
     }
 }

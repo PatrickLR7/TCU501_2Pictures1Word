@@ -13,7 +13,7 @@
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btnReview">
+        android:layout_above="@id/layoutHoriPl">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,16 +71,38 @@
     </LinearLayout>
 
 
-
-    <Button
-        android:id="@+id/btnReview"
-        android:text="Review"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:textColor="@color/colorWhite"
-        android:background="@color/colorOrangeDark"
-        android:layout_alignParentBottom="true"
+    <LinearLayout
+        android:id="@+id/layoutHoriPl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnReview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:background="@color/colorOrangeDark"
+            android:text="Review"
+            android:textColor="@color/colorWhite"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnAudioPl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:background="@color/colorWhite"
+            android:drawableStart="@drawable/soundicon"
+            android:onClick="audios"
+            android:text="Hint!"
+            android:textColor="@color/colorOrangeDark"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </RelativeLayout>
