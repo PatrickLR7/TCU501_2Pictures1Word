@@ -43,8 +43,9 @@ public class InOutDoorActivity extends AppCompatActivity {
     public ImageView imgViewQuestion2;
     //public ArrayList<Integer> listRand;
     public HashSet<Integer> randUsed;
-    int wordsCount;
-    TextToSpeech audio1;
+    public int wordsCount;
+    public TextToSpeech audio1;
+    public int answerPos;
 
     public int[] image_list1 = {
             R.drawable.basket1,
@@ -91,6 +92,21 @@ public class InOutDoorActivity extends AppCompatActivity {
             "painting"
     };
 
+    public String[] hints = {
+            "We met at a school basketball game.",
+            "I love to play the monopoly board game.",
+            "My father used to play cards with my uncle.",
+            "The kids started taking dancing classes and they had a lot of fun",
+            "I like to go fishing with my grandfather, it’s his favorite hobby!",
+            "Kayaking is a water sport practiced in rivers.",
+            "Rachel likes reading Harry Potter books.",
+            "Running is a great exercise to maintain a good health.",
+            "While skateboarding you have to use safety equipment, like a helmet.",
+            "Alex and Jonathan play soccer in the park every day.",
+            "Video games are awesome, but you should probably take a break after two hours.",
+            "Anthony likes painting pictures of the mountains."
+    };
+
     public char[] answer;
 
     String correct_answer;
@@ -102,6 +118,7 @@ public class InOutDoorActivity extends AppCompatActivity {
 
         randUsed = new HashSet<Integer>();
         wordsCount = 0;
+        answerPos = -1;
 
         initView();
 
@@ -186,6 +203,7 @@ public class InOutDoorActivity extends AppCompatActivity {
 
             correct_answer = answerList[aux];
             answer = correct_answer.toCharArray();
+            answerPos = aux;
 
             Common.userSubmitAnswer = new char[answer.length];
 
@@ -252,13 +270,19 @@ public class InOutDoorActivity extends AppCompatActivity {
     }
 
     public void audios(View v){
-        String toSpeak = correct_answer;
-        //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
-        if(!audio1.isSpeaking()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null, null);
-            } else {
-                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null);
+        //String toSpeak = correct_answer;
+        String toSpeak = "";
+        if(answerPos != -1){
+            toSpeak = hints[answerPos];
+        }
+        if(toSpeak != null) {
+            //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
+            if (!audio1.isSpeaking()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    audio1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
+                } else {
+                    audio1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                }
             }
         }
     }

@@ -39,6 +39,7 @@ public class PlacesActivity extends AppCompatActivity {
     public HashSet<Integer> randUsed;
     int wordsCount;
     TextToSpeech audio1;
+    public int answerPos;
 
     public int[] image_list1 = {
             R.drawable.amusementpark1,
@@ -85,6 +86,21 @@ public class PlacesActivity extends AppCompatActivity {
             "zoo"
     };
 
+    public String[] hints = {
+            "The kids love to ride the roller coaster on the amusement park.",
+            "We saw a lot of turtles and fish at the aquarium.",
+            "Guanacaste has a lot of cool beaches you can visit!",
+            "I saw the movie Coco with my friends at the cinema.",
+            "Cocos island is one of the most popular on Costa Rica.",
+            "Going to the mountain can be a great trip you can do with your family.",
+            "On some museums you can see dinosaur skeletons!",
+            "Swimming on a pool is very relaxing on summer.",
+            "The rainforest has a lot of cool species of animals.",
+            "If you go on a tour to a volcano you could probably swim on the hot springs.",
+            "La Paz waterfall here in Costa Rica is a beautiful place.",
+            "At the zoo you can look at a lot of wild animals."
+    };
+
     public char[] answer;
 
     String correct_answer;
@@ -96,6 +112,7 @@ public class PlacesActivity extends AppCompatActivity {
 
         randUsed = new HashSet<Integer>();
         wordsCount = 0;
+        answerPos = -1;
 
         initView();
 
@@ -179,6 +196,7 @@ public class PlacesActivity extends AppCompatActivity {
 
             correct_answer = answerList[aux];
             answer = correct_answer.toCharArray();
+            answerPos = aux;
 
             Common.userSubmitAnswer = new char[answer.length];
 
@@ -245,13 +263,19 @@ public class PlacesActivity extends AppCompatActivity {
     }
 
     public void audios(View v){
-        String toSpeak = correct_answer;
-        //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
-        if(!audio1.isSpeaking()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null, null);
-            } else {
-                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null);
+        //String toSpeak = correct_answer;
+        String toSpeak = "";
+        if(answerPos != -1){
+            toSpeak = hints[answerPos];
+        }
+        if(toSpeak != null) {
+            //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
+            if (!audio1.isSpeaking()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    audio1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
+                } else {
+                    audio1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                }
             }
         }
     }

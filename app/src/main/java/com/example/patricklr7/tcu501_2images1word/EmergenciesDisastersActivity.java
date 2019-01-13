@@ -37,8 +37,9 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
     public ImageView imgViewQuestion2;
     //public ArrayList<Integer> listRand;
     public HashSet<Integer> randUsed;
-    int wordsCount;
-    TextToSpeech audio1;
+    public int wordsCount;
+    public TextToSpeech audio1;
+    public int answerPos;
 
     public int[] image_list1 = {
             R.drawable.avalanche1,
@@ -85,6 +86,21 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
             "tsunami"
     };
 
+    public String[] hints = {
+            "An avalanche occurs when a layer of snow collapses and slides downhill.",
+            "Michael didn’t stop his car at the semaphore and he had an accident.",
+            "Droughts occur when the is a lack of rain over an extended period of time.",
+            "During an earthquake, you have to take cover under something sturdy.",
+            "Last year the Turrialba volcano had several eruptions.",
+            "A flood happens when an overflowing water submerges a dry land.",
+            "The firemen came with several fire trucks to stop the forest fire.",
+            "A hurricane is an intense tropical storm with powerful winds.",
+            "A landslide is the movement of a mass of rock or earth down a slope.",
+            "A thunderstorm is a storm with lightning and thunder.",
+            "There are tornados powerful enough to destroy building’s ceilings.",
+            "Tsunamis are huge waves of water that are usually caused by earthquakes."
+    };
+
     public char[] answer;
 
     String correct_answer;
@@ -96,6 +112,7 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
 
         randUsed = new HashSet<Integer>();
         wordsCount = 0;
+        answerPos = -1;
 
         initView();
 
@@ -179,6 +196,7 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
 
             correct_answer = answerList[aux];
             answer = correct_answer.toCharArray();
+            answerPos = aux;
 
             Common.userSubmitAnswer = new char[answer.length];
 
@@ -245,13 +263,19 @@ public class EmergenciesDisastersActivity extends AppCompatActivity {
     }
 
     public void audios(View v){
-        String toSpeak = correct_answer;
-        //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
-        if(!audio1.isSpeaking()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null, null);
-            } else {
-                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null);
+        //String toSpeak = correct_answer;
+        String toSpeak = "";
+        if(answerPos != -1){
+            toSpeak = hints[answerPos];
+        }
+        if(toSpeak != null) {
+            //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
+            if (!audio1.isSpeaking()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    audio1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
+                } else {
+                    audio1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                }
             }
         }
     }

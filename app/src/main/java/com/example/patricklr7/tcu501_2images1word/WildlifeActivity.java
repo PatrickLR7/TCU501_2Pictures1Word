@@ -38,9 +38,9 @@ public class WildlifeActivity extends AppCompatActivity {
     public ImageView imgViewQuestion2;
     //public ArrayList<Integer> listRand;
     public HashSet<Integer> randUsed;
-    int wordsCount;
-    TextToSpeech audio1;
-    Button btnHint;
+    public int wordsCount;
+    public TextToSpeech audio1;
+    public Button btnHint;
 
     public int[] image_list1 = {
             R.drawable.crab1,
@@ -87,9 +87,26 @@ public class WildlifeActivity extends AppCompatActivity {
             "zebra"
     };
 
+    public String[] hints = {
+            "Crabs are animals that live in the sea and on the beaches.",
+            "Here in Costa Rica, you can see a lot of crocodiles in the Tárcoles river.",
+            "Elephants are the largest land mammals.",
+            "A giraffe has a long neck to reach food high on tree branches.",
+            "Bananas aren’t the only thing monkeys eat. They are omnivores.",
+            "Some species of parrots are known for imitating human voices.",
+            "Raccoons are nocturnal animals.",
+            "An animal that is known for moving slowly is the sloth.",
+            "Most squirrels are small and have big eyes and bushy tails.",
+            "The tiger is the biggest species of the cat family.",
+            "We have to protect sea turtles because they are an endangered species.",
+            "Zebras are herbivores, that means they eat plants."
+    };
+
     public char[] answer;
 
     String correct_answer;
+
+    int answerPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +115,7 @@ public class WildlifeActivity extends AppCompatActivity {
 
         randUsed = new HashSet<Integer>();
         wordsCount = 0;
+        answerPos = -1;
 
         initView();
 
@@ -183,6 +201,7 @@ public class WildlifeActivity extends AppCompatActivity {
 
             correct_answer = answerList[aux];
             answer = correct_answer.toCharArray();
+            answerPos = aux;
 
             Common.userSubmitAnswer = new char[answer.length];
 
@@ -249,13 +268,19 @@ public class WildlifeActivity extends AppCompatActivity {
     }
 
     public void audios(View v){
-        String toSpeak = correct_answer;
-        //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
-        if(!audio1.isSpeaking()) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null, null);
-            } else {
-                audio1.speak(correct_answer, TextToSpeech.QUEUE_FLUSH, null);
+        //String toSpeak = correct_answer;
+        String toSpeak = "";
+        if(answerPos != -1){
+            toSpeak = hints[answerPos];
+        }
+        if(toSpeak != null) {
+            //Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
+            if (!audio1.isSpeaking()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    audio1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
+                } else {
+                    audio1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                }
             }
         }
     }
